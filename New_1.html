@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <title>Process Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f4f7f6;
+        }
+        .input-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #cfcfcf;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        input:focus, select:focus {
+            border-color: #cfcfcf;
+            outline: none;
+        }
+        button {
+            background-color: #f44336;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #f44337;
+        }
+        .output-section {
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .gantt-wrapper {
+            overflow-x: auto;
+            padding-bottom: 25px;
+        }
+        .gantt-chart {
+            display: flex;
+            align-items: flex-start;
+        }
+        .gantt-block {
+            border: 1px solid #333;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+            position: relative;
+        }
+        .gantt-time {
+            position: absolute;
+            bottom: -22px;
+            right: 0;
+            color: #333;
+            font-size: 12px;
+            font-weight: normal;
+        }
+        .gantt-start-time {
+            position: absolute;
+            bottom: -22px;
+            left: 0;
+            color: #333;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="input-section">
+    <form>
+        <div class="form-group">
+            <label for="algoType">Algorithm Type:</label>
+            <select id="algoType" required>
+                <option value="FCFS">First Come First Serve (FCFS)</option>
+                <option value="SJF">Shortest Job First (SJF)</option>
+                <option value="SRTF">Shortest Remaining Time First (SRTF)</option>
+                <option value="Priority">Priority Scheduling</option>
+                <option value="RR">Round Robin (RR)</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="quantumGroup" style="display: none;">
+            <label for="quantumTime">Quantum Time</label>
+            <input type="number" id="quantumTime" min="1" placeholder="0">
+        </div>
+
+        <div class="form-group">
+            <label for="arrivalTimes">Arrival Times</label>
+            <input type="text" id="arrivalTimes" required placeholder="0 0 0 0">
+        </div>
+
+        <div class="form-group">
+            <label for="burstTimes">Burst Times</label>
+            <input type="text" id="burstTimes" required placeholder="0 0 0 0">
+        </div>
+
+        <div class="form-group" id="priorityGroup" style="display: none;">
+            <label for="priorities">Priorities</label>
+            <input type="text" id="priorities" placeholder="e.g. 1 2 3 4 (Lower number = Higher Priority)">
+        </div>
+
+        <button type="submit">Process</button>
+    </form>
+</div>
+
+<div class="output-section" id="outputSection">
+    <h3>Calculation Table</h3>
+    <table id="resultTable">
+        <thead>
+            <tr>
+                <th>Process</th>
+                <th>Arrival Time (AT)</th>
+                <th>Burst Time (BT)</th>
+                <th>Completion Time (CT)</th>
+                <th>Turnaround Time (TAT)</th>
+                <th>Waiting Time (WT)</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h3>Gantt Chart</h3>
+    <div class="gantt-wrapper" id="ganttContainer"></div>
+</div>
+
+<script src="script.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"499e684b7b1043878977050a0a606794","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
